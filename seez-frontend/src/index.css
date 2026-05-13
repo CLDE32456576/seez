@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── CSS Custom Properties ──────────────────────────────────────────────── */
+:root {
+  --bg-base:    #121414;
+  --bg-card:    #1e2020;
+  --bg-input:   #1a1c1c;
+  --bg-hover:   #282a2b;
+  --bg-deep:    #080b12;
+  --bg-nav:     rgba(18,20,20,0.95);
+  --text-hi:    #c8c6c5;
+  --text-mid:   #8e9192;
+  --text-lo:    #444748;
+  --border-lo:  rgba(68,71,72,0.3);
+  --border-mid: rgba(68,71,72,0.2);
+  --bar-bg:     #333535;
+}
+
+:root.light {
+  --bg-base:    #f0f0ec;
+  --bg-card:    #ffffff;
+  --bg-input:   #f5f4f2;
+  --bg-hover:   #e6e5e3;
+  --bg-deep:    #e8e8e5;
+  --bg-nav:     rgba(240,240,236,0.96);
+  --text-hi:    #1a1c1c;
+  --text-mid:   #5c5e5f;
+  --text-lo:    #9a9c9d;
+  --border-lo:  rgba(140,142,143,0.35);
+  --border-mid: rgba(140,142,143,0.2);
+  --bar-bg:     #d4d5d5;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: #e2e2e2;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.light body, .light {
+  color: var(--text-hi);
+}
+
+#root { min-height: 100vh; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #444748; border-radius: 2px; }
+.light ::-webkit-scrollbar-thumb { background: #c0c1c2; }
+
+/* ── Typography ─────────────────────────────────────────────────────────── */
+.font-display  { font-family: 'Playfair Display', serif; }
+.font-header   { font-family: 'Outfit', sans-serif; }
+.font-mono-data { font-family: 'JetBrains Mono', monospace; }
+
+.label-caps {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+.hairline { border-width: 0.5px; }
+
+.gradient-text {
+  background: linear-gradient(135deg, #dcc662, #c8c6c5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Light mode overrides for Tailwind arbitrary color classes ───────────
+   These override the hardcoded hex values used throughout the app.
+   Inline styles are NOT affected here — key components use CSS vars.       */
+
+/* Backgrounds */
+.light .bg-\[\#121414\]  { background-color: var(--bg-base)  !important; }
+.light .bg-\[\#1e2020\]  { background-color: var(--bg-card)  !important; }
+.light .bg-\[\#1a1c1c\]  { background-color: var(--bg-input) !important; }
+.light .bg-\[\#282a2b\]  { background-color: var(--bg-hover) !important; }
+.light .bg-\[\#080b12\]  { background-color: var(--bg-deep)  !important; }
+.light .bg-\[\#0c0f0f\]  { background-color: var(--bg-deep)  !important; }
+.light .bg-\[\#333535\]  { background-color: var(--bar-bg)   !important; }
+
+/* Text */
+.light .text-\[\#c8c6c5\]  { color: var(--text-hi)  !important; }
+.light .text-\[\#8e9192\]  { color: var(--text-mid) !important; }
+.light .text-\[\#444748\]  { color: var(--text-lo)  !important; }
+.light .text-\[\#e2e2e2\]  { color: var(--text-hi)  !important; }
+
+/* Borders */
+.light .border-\[\#444748\]\/30 { border-color: var(--border-lo) !important; }
+.light .border-\[\#444748\]\/20 { border-color: var(--border-mid) !important; }
+
+/* Hover backgrounds */
+.light .hover\:bg-\[\#282a2b\]:hover { background-color: var(--bg-hover) !important; }
+
+/* Navbar dark glass */
+.seez-nav {
+  background-color: var(--bg-nav);
+  border-color: var(--border-lo);
+}
+
+/* App shell */
+.seez-shell {
+  background-color: var(--bg-base);
+}
