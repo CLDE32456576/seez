@@ -4,7 +4,8 @@ import { useAuthStore } from '../stores/authStore'
 import { useUserStore } from '../stores/userStore'
 import { StatHexagon } from '../components/seez-card/StatHexagon'
 import { getRankColor, getRankEmoji } from '../lib/utils'
-import { MOCK_CARD } from '../lib/mockData'
+// No mock data on dashboard — new users should see real zeros, not fake numbers
+const MOCK_CARD = null
 import { api } from '../lib/api'
 import { WelcomeModal } from '../components/common/WelcomeModal'
 
@@ -67,7 +68,12 @@ export default function Dashboard() {
     if (!alreadySeen) setShowWelcome(true)
   }, [user?.id])
 
-  const displayCard = card || MOCK_CARD
+  const displayCard = card || {
+    opening_stat: 50, rapport_stat: 50, discovery_stat: 50,
+    objection_stat: 50, closing_stat: 50, adaptability_stat: 50,
+    overall_rating: 50, elo: 0, rank_tier: 'Grinder', rank_title: 'Just Getting Started',
+    current_streak: 0, longest_streak: 0, total_calls: 0, calls_graded_b_or_above: 0,
+  }
   const username = user?.email?.split('@')[0] || 'Operator'
   const initials = username.slice(0, 2).toUpperCase()
   const rankColor = getRankColor(displayCard.rank_tier)
@@ -147,14 +153,14 @@ export default function Dashboard() {
 
           {/* Streak panel */}
           <div className="border border-[#444748]/30 bg-[#1e2020] p-6 flex flex-col items-center justify-center w-44 flex-shrink-0 text-center">
-            <div className="text-3xl mb-2 leading-none">{streakActive ? streakIcon : '—'}</div>
+            <div className="text-2xl mb-1 leading-none">{streakActive ? streakIcon : '—'}</div>
             <div
-              className="font-display font-semibold mb-1"
-              style={{ fontSize: 48, lineHeight: 1, color: streakActive ? '#dcc662' : '#444748' }}
+              className="font-display font-semibold"
+              style={{ fontSize: 36, lineHeight: 1.1, color: streakActive ? '#dcc662' : '#444748' }}
             >
               {displayCard.current_streak}
             </div>
-            <p className="label-caps text-[#8e9192]" style={{ fontSize: '9px' }}>DAY STREAK</p>
+            <p className="label-caps text-[#8e9192] mt-1" style={{ fontSize: '9px' }}>DAY STREAK</p>
             {!streakActive && (
               <p className="font-mono-data text-[10px] text-[#8e9192]/50 mt-2 leading-relaxed">
                 Call today<br />to start
